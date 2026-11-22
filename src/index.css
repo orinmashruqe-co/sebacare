@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-editorial: 'Plus Jakarta Sans', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html.large-font {
+    font-size: 18.5px;
+  }
+
+  body {
+    color: #121E1D;
+    background-color: #F3EFE7;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+  letter-spacing: -0.025em;
+}
+
+.ambient-canvas {
+  background-color: #F3EFE7;
+  background-image:
+    radial-gradient(at 12% 8%, rgba(169, 214, 206, 0.42) 0px, transparent 52%),
+    radial-gradient(at 88% 18%, rgba(239, 219, 189, 0.48) 0px, transparent 48%),
+    radial-gradient(at 75% 88%, rgba(196, 224, 217, 0.35) 0px, transparent 55%);
+  background-attachment: fixed;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(22px) saturate(1.45);
+  -webkit-backdrop-filter: blur(22px) saturate(1.45);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 12px 32px -14px rgba(15, 42, 39, 0.10),
+    0 2px 6px -1px rgba(15, 42, 39, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.glass-hero {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(246, 251, 249, 0.78) 65%,
+    rgba(227, 243, 239, 0.76) 100%
+  );
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 24px 48px -18px rgba(11, 94, 86, 0.16),
+    0 4px 12px -2px rgba(18, 30, 29, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.glass-obsidian {
+  background: linear-gradient(
+    150deg,
+    rgba(21, 35, 34, 0.94) 0%,
+    rgba(13, 24, 23, 0.98) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 24px 48px -16px rgba(10, 20, 19, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.glass-amber {
+  background: linear-gradient(
+    135deg,
+    rgba(254, 247, 231, 0.86) 0%,
+    rgba(250, 238, 211, 0.78) 100%
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(214, 177, 108, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+@media print {
+  body, .ambient-canvas {
+    background: #FFFFFF !important;
+  }
+  .glass-panel, .glass-hero, .glass-obsidian {
+    background: #FFFFFF !important;
+    color: #121E1D !important;
+    box-shadow: none !important;
+    border: 1px solid #D1D5DB !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

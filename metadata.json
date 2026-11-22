@@ -1,0 +1,6 @@
+{
+  "name": "SebaCare",
+  "description": "Bilingual family medicine care app with offline alarms, AI prescription scanning, Bangla voice reminders, caregiver alerts, and emergency health cards.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
