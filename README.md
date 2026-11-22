@@ -2,42 +2,24 @@
 
 Bilingual (Bangla & English) medicine care, prescription scanning, AI voice reminder, and emergency health card web application powered by Google Gemini and Supabase.
 
-## Free Cardless Deployment Guide (GitHub + Render + Supabase)
+## Free Cardless Deployment Guide (GitHub + Vercel + Supabase)
 
 ### 1. Create a Free Supabase Database (No Card Required)
 1. Sign up at [supabase.com](https://supabase.com) and create a new free project.
 2. Open **SQL Editor** → **New Query**, paste the contents of `supabase/schema.sql`, and click **Run**.
-3. Go to **Project Settings** → **API** and copy:
-   - **Project URL** → `SUPABASE_URL`
-   - **service_role secret key** → `SUPABASE_SERVICE_ROLE_KEY` *(keep server-side only — never expose in browser code)*
+3. Go to **Project Settings** → **Integrations → Data API** and copy your **Project URL** (`https://xxxx.supabase.co`).
+4. Go to **Project Settings** → **API Keys**, scroll down to **Secret keys** (or click **View legacy API keys** → `service_role`), and copy your **Secret key** (`sb_secret_...` or `service_role`). *(Do not use `sb_publishable_...`.)*
 
 ### 2. Get a Free Google Gemini API Key (No Card Required)
 1. Go to [aistudio.google.com](https://aistudio.google.com) and create a `GEMINI_API_KEY`.
 
-### 3. Push Code to GitHub
-```bash
-git init
-git add .
-git commit -m "Initial SebaCare app"
-git branch -M main
-git remote add origin https://github.com/<your-username>/sebacare.git
-git push -u origin main
-```
-*(Note: `.env*` and `data/` are ignored via `.gitignore` so secrets and local test records are never pushed.)*
-
-### 4. Deploy Public Link on Render (No Card Required)
-1. Sign in at [render.com](https://render.com) with GitHub.
-2. Click **New +** → **Blueprint** (or **Web Service**) and select your `sebacare` repository (`render.yaml` is pre-configured).
-3. Enter your environment variables:
+### 3. Deploy Public Link on Vercel (No Card Required)
+1. Push this repo to GitHub (or use the **GitHub** button in AI Studio).
+2. Sign in at [vercel.com](https://vercel.com) with **GitHub**.
+3. Click **Add New…** → **Project** → **Import** your `sebacare` repository.
+4. Expand **Environment Variables** and add:
    - `GEMINI_API_KEY`
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
-4. Deploy and share your live `.onrender.com` URL!
-
-## Local Development
-```bash
-npm install
-cp .env.example .env
-# Fill in GEMINI_API_KEY (and optionally SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY)
-npm run dev
-```
+   - `SESSION_SECRET` (any random text/passphrase you make up)
+5. Click **Deploy** and share your live `.vercel.app` link!

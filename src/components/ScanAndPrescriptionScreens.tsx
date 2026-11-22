@@ -219,9 +219,28 @@ export const ScanScreen: React.FC<{
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        runAiExtraction(reader.result, file.type || 'image/jpeg');
-      }
+      if (typeof reader.result !== 'string') return;
+      const rawDataUrl = reader.result;
+      const img = new Image();
+      img.onload = () => {
+        const maxDim = 1600;
+        const scale = Math.min(1, maxDim / Math.max(img.width || 1, img.height || 1));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round((img.width || 800) * scale));
+        canvas.height = Math.max(1, Math.round((img.height || 800) * scale));
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const compressed = canvas.toDataURL('image/jpeg', 0.82);
+          runAiExtraction(compressed, 'image/jpeg');
+        } else {
+          runAiExtraction(rawDataUrl, file.type || 'image/jpeg');
+        }
+      };
+      img.onerror = () => {
+        runAiExtraction(rawDataUrl, file.type || 'image/jpeg');
+      };
+      img.src = rawDataUrl;
     };
     reader.readAsDataURL(file);
   };

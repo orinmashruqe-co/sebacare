@@ -18,3 +18,4 @@ create index if not exists idx_sebacare_users_nid
 
 -- Lock down direct browser/anon access; only the Node server (service role key) reads/writes this table
 alter table public.sebacare_users enable row level security;
+grant all on table public.sebacare_users to service_role;

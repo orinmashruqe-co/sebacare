@@ -3,12 +3,12 @@ services:
     name: sebacare
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev --legacy-peer-deps && npm run build
     startCommand: NODE_ENV=production npx tsx server.ts
     healthCheckPath: /api/health
     envVars:
-      - key: NODE_ENV
-        value: production
+      - key: NODE_VERSION
+        value: 22.14.0
       - key: GEMINI_API_KEY
         sync: false
       - key: SUPABASE_URL
